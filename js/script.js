@@ -8,7 +8,7 @@ if (window.location.hash === "#cluster") {
 }
 
 // Google Docs spreadsheet key
-var spreadsheet_key = '0As3JvOeYDO50dF9NWWRiaTdqNmdKQ1lCY3dpdDhZU3c';
+var spreadsheet_key = '1Wv_oGyVOHm6lXjvK4swyWn_hBNwmrzx6ZP6F8sPBC7w';
 
 // Name of lat, long columns in Google spreadsheet
 var lat_column = 'latitude';
@@ -28,16 +28,16 @@ var global_markers_data;
 // Function that creates our popup
 function generatePopup(content){
     // Generate header
-	var popup_header = "<h4>" + toTitleCase(content['brewery']) + "</h4>"
+	var popup_header = "<h4>" + toTitleCase(content['name']) + "</h4>"
 	
 	// Generate content
 	var popup_content = '<table class="popup_table table">';
-	popup_content += '<tr><td><strong>Address:</strong></td>';
-	popup_content += '<td>' + content['address'] + '</td>';
-	popup_content += '<tr><td><strong>City:</strong></td>';
-	popup_content += '<td>' + content['city'] + '</td>';
-	popup_content += '<tr><td><strong>Phone:</strong></td>';
-	popup_content += '<td>' + content['phone'] + '</td>';
+	popup_content += '<tr><td><strong>Title1:</strong></td>';
+	popup_content += '<td>' + content['info1'] + '</td>';
+	popup_content += '<tr><td><strong>Title2:</strong></td>';
+	popup_content += '<td>' + content['info2'] + '</td>';
+	popup_content += '<tr><td><strong>Title3:</strong></td>';
+	popup_content += '<td>' + content['info3'] + '</td>';
 		popup_content += '<tr><td colspan="2"><strong><a href="http://' + content['website'] + '" target="_blank">Learn more</a></strong></td>';
 	popup_content += '</tr></table>'
 

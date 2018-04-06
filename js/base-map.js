@@ -1,8 +1,6 @@
-// Set view of Leaflet map based on screen size
-var layer = new L.StamenTileLayer('toner');
-if ($(window).width() < 626) {
-	var map = new L.Map('map').setView([42,-93],6);
-} else {
-	var map = new L.Map('map').setView([42,-91.5],7);
-}
-map.addLayer(layer);
+
+var map = L.map('map').setView([38.209616, -85.5], 11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
