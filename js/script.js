@@ -65,6 +65,12 @@ function loadMarkersToMap(markers_data) {
 			var latlngs = [JSON.parse(markers_data[num].area)];
 			var geoJson = L.geoJSON(latlngs).addTo(map);
 			geoJson.bindPopup( generatePopup(current) );
+			geoJson.on('mouseover', function (e) {
+				this.openPopup();
+			});
+			// geoJson.on('mouseout', function (e) {
+			// 	this.closePopup();
+			// });
 		}
 
 		// Determine radius of the circle by the value in total
@@ -82,6 +88,12 @@ function loadMarkersToMap(markers_data) {
 
 		// Generate popup
 		layer_marker.bindPopup( generatePopup(current) );
+		layer_marker.on('mouseover', function (e) {
+			this.openPopup();
+		});
+		// layer_marker.on('mouseout', function (e) {
+		// 	this.closePopup();
+		// });
 
 		// Add events to marker
 		(function (num){
