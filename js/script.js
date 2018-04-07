@@ -20,7 +20,7 @@ var radius = 8;
 var fill_color = "#023858";
 var border_color = "#FFF";
 // Hover
-var fill_color_hover = "#FFF";
+var fill_color_hover = "#AAA";
 var border_color_hover = "#333"
 
 var global_markers_data;
@@ -57,10 +57,19 @@ function loadMarkersToMap(markers_data) {
 
 	for (var num = 0; num < markers_data.length; num++) {
 		// Capture current iteration through JSON file
-		current = markers_data[num];
-
 		// Add lat, long to marker
-		var marker_location = new L.LatLng(current[lat_column], current[long_column]);
+		if (markers_data[num].type=="point") {
+			current = markers_data[num];
+			var marker_location = new L.LatLng(current[lat_column], current[long_column]);
+		} else {
+			var latlngs = [JSON.parse(markers_data[num].area)];
+			console.log(latlngs);
+			var polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
+			map.fitBounds(polygon.getBounds());
+			// var latlngs = [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]];
+			// var polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
+			// map.fitBounds(polygon.getBounds());
+		}
 
 		// Determine radius of the circle by the value in total
 		// radius_actual = Math.sqrt(current['total'] / 3.14) * 2.8;
@@ -84,12 +93,12 @@ function loadMarkersToMap(markers_data) {
 			function mouseOver(e) {
 				var layer_marker = e.target;
 		        layer_marker.setStyle({
-		            radius: radius + 1,
+		            radius: radius + 5,
 		            fillColor: fill_color_hover,
 		            color: border_color_hover,
 		            weight: 2,
 		            opacity: 1,
-		            fillOpacity: 1
+					fillOpacity: 1
 				});
 				// layer_marker.openPopup();
 		    }
