@@ -64,11 +64,8 @@ function loadMarkersToMap(markers_data) {
 		} else {
 			var latlngs = [JSON.parse(markers_data[num].area)];
 			console.log(latlngs);
-			var polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
-			map.fitBounds(polygon.getBounds());
-			// var latlngs = [[37, -109.05],[41, -109.03],[41, -102.05],[37, -102.04]];
-			// var polygon = L.polygon(latlngs, {color: 'red'}).addTo(map);
-			// map.fitBounds(polygon.getBounds());
+			var polygon = L.polygon(latlngs, {color: 'green'}).addTo(map);
+			polygon.bindPopup( generatePopup(current) );
 		}
 
 		// Determine radius of the circle by the value in total
