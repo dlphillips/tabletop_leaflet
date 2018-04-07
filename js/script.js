@@ -61,11 +61,10 @@ function loadMarkersToMap(markers_data) {
 		if (markers_data[num].type=="point") {
 			current = markers_data[num];
 			var marker_location = new L.LatLng(current[lat_column], current[long_column]);
-		} else {
+		} else if (markers_data[num].type=="geojson") {
 			var latlngs = [JSON.parse(markers_data[num].area)];
-			console.log(latlngs);
-			var polygon = L.polygon(latlngs, {color: 'green'}).addTo(map);
-			polygon.bindPopup( generatePopup(current) );
+			var geoJson = L.geoJSON(latlngs).addTo(map);
+			geoJson.bindPopup( generatePopup(current) );
 		}
 
 		// Determine radius of the circle by the value in total
