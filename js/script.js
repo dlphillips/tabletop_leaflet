@@ -61,7 +61,22 @@ function loadMarkersToMap(markers_data) {
 		if (markers_data[num].type=="point") {
 			current = markers_data[num];
 			var marker_location = new L.LatLng(current[lat_column], current[long_column]);
+			var layer_marker = L.circleMarker(marker_location, {
+				radius: radius,
+				fillColor: fill_color,
+				color: border_color,
+				weight: 1,
+				opacity: 1,
+				fillOpacity: 0.8
+			});
+			// Generate popup
+			layer_marker.bindPopup( generatePopup(current) );
+			layer_marker.on('mouseover', function (e) {
+				this.openPopup();
+			});
+
 		} else if (markers_data[num].type=="geojson") {
+			current = markers_data[num];
 			var latlngs = [JSON.parse(markers_data[num].area)];
 			var geoJson = L.geoJSON(latlngs).addTo(map);
 			geoJson.bindPopup( generatePopup(current) );
@@ -76,24 +91,6 @@ function loadMarkersToMap(markers_data) {
 		// Determine radius of the circle by the value in total
 		// radius_actual = Math.sqrt(current['total'] / 3.14) * 2.8;
 
-		// Options for our circle marker
-		var layer_marker = L.circleMarker(marker_location, {
-			radius: radius,
-			fillColor: fill_color,
-			color: border_color,
-			weight: 1,
-			opacity: 1,
-			fillOpacity: 0.8
-		});
-
-		// Generate popup
-		layer_marker.bindPopup( generatePopup(current) );
-		layer_marker.on('mouseover', function (e) {
-			this.openPopup();
-		});
-		// layer_marker.on('mouseout', function (e) {
-		// 	this.closePopup();
-		// });
 
 		// Add events to marker
 		(function (num){
