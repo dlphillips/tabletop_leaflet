@@ -78,9 +78,9 @@ function loadMarkersToMap(markers_data) {
 		} else if (markers_data[num].type=="geojson") {
 			current = markers_data[num];
 			var latlngs = [JSON.parse(markers_data[num].area)];
-			var geoJson = L.geoJSON(latlngs).addTo(map);
-			geoJson.bindPopup( generatePopup(current) );
-			geoJson.on('mouseover', function (e) {
+			var layer_marker = L.geoJSON(latlngs).addTo(map);
+			layer_marker.bindPopup( generatePopup(current) );
+			layer_marker.on('mouseover', function (e) {
 				this.openPopup();
 			});
 			// geoJson.on('mouseout', function (e) {
